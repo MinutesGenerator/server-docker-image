@@ -1,4 +1,4 @@
-FROM ghcr.io/minutesgenerator/server-docker-image:latest
+FROM ghcr.io/minutesgenerator/server-docker-image-base:latest
 
 # Install required packages
 RUN apt-get update && \
