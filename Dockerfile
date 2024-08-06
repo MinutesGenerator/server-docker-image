@@ -2,7 +2,7 @@ FROM ghcr.io/minutesgenerator/server-docker-image-base:latest
 
 # Install required packages
 RUN apt-get update && \
-  apt-get install -y wget screen rsync vim && \
+  apt-get install -y wget screen rsync vim openssh-server && \
   rm -rf /var/lib/apt/lists/*
 
 # Install Miniconda
@@ -20,8 +20,10 @@ RUN wget -O - https://minutesgeneratorpublic.s3.amazonaws.com/data-2023-03-25-02
 
 COPY server_env.yml /tmp/server_env.yml
 
-# Create the conda environment the server uses
-RUN conda env create -f /tmp/server_env.yml && \
-  conda clean -afy
+# Copy the setup script into the image
+COPY setup.sh /usr/local/bin/setup.sh
 
-RUN conda run -n myenv pip install torch==2.1.0+cu121 torchaudio==2.1.0+cu121 torchvision==0.16.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+# Make the setup script executable
+RUN chmod +x /usr/local/bin/setup.sh
+
+CMD bash -c 'apt update; mkdir -p ~/.ssh; cd ~/.ssh; chmod 700 ~/.ssh; echo "$PUBLIC_KEY" >> authorized_keys; chmod 600 authorized_keys; service ssh start; sleep infinity'
