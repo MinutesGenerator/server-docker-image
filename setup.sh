@@ -6,3 +6,7 @@ conda env create -f /tmp/server_env.yml && \
 
 # Install specific versions of torch, torchaudio, and torchvision
 conda run -n myenv pip install torch==2.1.0+cu121 torchaudio==2.1.0+cu121 torchvision==0.16.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+
+# Install node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+nvm install 20 
