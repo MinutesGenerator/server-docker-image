@@ -7,6 +7,10 @@ cloudflared --version
 rustc --version
 cargo --version
 
+for bin in cargo rustc rustup rustfmt cargo-clippy conda; do
+  test -x "/usr/local/bin/${bin}"
+done
+
 tmp_dir="$(mktemp -d)"
 trap 'rm -rf "${tmp_dir}"' EXIT
 

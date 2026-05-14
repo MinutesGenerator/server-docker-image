@@ -62,6 +62,13 @@ RUN conda init bash && \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain 1.87.0 && \
   rustup component add clippy rustfmt
 
+RUN ln -sf /root/.cargo/bin/cargo /usr/local/bin/cargo && \
+  ln -sf /root/.cargo/bin/rustc /usr/local/bin/rustc && \
+  ln -sf /root/.cargo/bin/rustup /usr/local/bin/rustup && \
+  ln -sf /root/.cargo/bin/rustfmt /usr/local/bin/rustfmt && \
+  ln -sf /root/.cargo/bin/cargo-clippy /usr/local/bin/cargo-clippy && \
+  ln -sf /opt/miniconda/bin/conda /usr/local/bin/conda
+
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY smoke-test.sh /usr/local/bin/smoke-test.sh
 
