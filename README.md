@@ -8,6 +8,7 @@ The image preinstalls the slow, one-time server dependencies that used to be han
 - Conda environment `mgenv` with Python 3.11 and the server speech dependencies
 - Rust `1.87.0`
 - FFmpeg, LibreOffice, Poppler, Cloudflared, SSH, and Rust build dependencies
+- `/usr/local/bin` links for Rust and Conda tools so non-interactive SSH deploy commands can find them
 
 Use Docker image `ghcr.io/minutesgenerator/server-docker-image:5` in Runpod.
 
