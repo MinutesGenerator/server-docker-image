@@ -57,5 +57,9 @@ import whisper
 
 print("python deps ok")
 print(f"torch={torch.__version__}")
+print(f"torch_cuda={torch.version.cuda}")
 print(f"cuda_available={torch.cuda.is_available()}")
+
+assert torch.__version__.startswith("2.11.0+cu126"), torch.__version__
+assert torch.version.cuda == "12.6", torch.version.cuda
 '
