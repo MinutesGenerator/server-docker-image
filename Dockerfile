@@ -50,13 +50,17 @@ RUN conda init bash && \
   conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r && \
   conda create -n mgenv python=3.11 -y && \
   conda run -n mgenv pip install --no-cache-dir \
+    torch==2.11.0 \
+    torchaudio==2.11.0 \
+    --index-url https://download.pytorch.org/whl/cu126 && \
+  conda run -n mgenv pip install --no-cache-dir \
     openai-whisper \
     pyinstrument \
     python-dotenv \
     silero-vad \
     soundfile \
-    speechbrain \
-    torchaudio && \
+    speechbrain && \
+  conda run -n mgenv pip check && \
   conda clean -afy
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain 1.87.0 && \

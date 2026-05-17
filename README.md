@@ -6,17 +6,18 @@ The image preinstalls the slow, one-time server dependencies that used to be han
 
 - Miniconda at `/opt/miniconda`
 - Conda environment `mgenv` with Python 3.11 and the server speech dependencies
+- PyTorch/Torchaudio `2.11.0+cu126` for Runpod drivers that support CUDA 12.6/12.7 but not CUDA 13
 - Rust `1.87.0`
 - FFmpeg, LibreOffice, Poppler, Cloudflared, SSH, and Rust build dependencies
 - `/usr/local/bin` links for Rust and Conda tools so non-interactive SSH deploy commands can find them
 
-Use Docker image `ghcr.io/minutesgenerator/server-docker-image:5` in Runpod.
+Use Docker image `ghcr.io/minutesgenerator/server-docker-image:6` in Runpod.
 
 ## Build
 
 ```bash
-docker buildx build --platform linux/amd64 --load -t ghcr.io/minutesgenerator/server-docker-image:5 .
-docker run --rm --platform linux/amd64 --entrypoint /usr/local/bin/smoke-test.sh ghcr.io/minutesgenerator/server-docker-image:5
+docker buildx build --platform linux/amd64 --load -t ghcr.io/minutesgenerator/server-docker-image:6 .
+docker run --rm --platform linux/amd64 --entrypoint /usr/local/bin/smoke-test.sh ghcr.io/minutesgenerator/server-docker-image:6
 ```
 
 ## Push
@@ -24,7 +25,7 @@ docker run --rm --platform linux/amd64 --entrypoint /usr/local/bin/smoke-test.sh
 ```bash
 docker buildx build \
   --platform linux/amd64 \
-  -t ghcr.io/minutesgenerator/server-docker-image:5 \
+  -t ghcr.io/minutesgenerator/server-docker-image:6 \
   -t ghcr.io/minutesgenerator/server-docker-image:latest \
   --push .
 ```
